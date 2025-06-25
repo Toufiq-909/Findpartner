@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.4.0/dist/full.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {},
+                screens: {
+                    'sm': '640px',
+                    'md': '768px', // Must be present for `md:` to work
+                    'lg': '1024px',
+                    'xl': '1280px',
+                }
+            },
+            plugins: [],
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Imperial+Script&family=Lavishly+Yours&family=Pinyon+Script&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white">
+<div class="outer flex flex-col md:flex-row">
+    <div class="left ml-8 w-[85%]   md:w-[50%]">
+        <p class="font-[cookie] text-black text-4xl md:text-6xl mb-4">Great teams start here - Find, connect, and collaborate!</p>
+        <div class="flex flex-col w-[100%] ml-0 md:w-[60%] md:ml-8">
+            <div class="username flex justify-between">
+                <p class="text-black font-[cookie] text-3xl">Username</p>
+            </div>
+            <input id="k" class="input mt-2 mb-2 md:mt-4 mb-4" type="text" placeholder="Enter your username" required>
+          <div class="mail flex justify-between">
+              <p class="text-black font-[cookie] text-3xl">Mail</p>
+          </div>
+            <input id="i" class="input mt-2 mb-2 md:mt-4 mb-4" type="email" placeholder="Enter your mail" required>
+            <div class="password flex justify-between">
+                <p class="text-black font-[cookie] text-3xl">Password</p>
+            </div>
+            <input id="j" class="input mt-2 mb-2 md:mt-4 mb-4" type="password" placeholder="Enter your Passsword" required>
+            <button class="btn  mt-5 normal-case text-white text-4xl font-[cookie]" onclick="up()">Sign Up</button>
+        </div>
+    </div>
+    <img src="../../images/Team%20spirit-pana.png" class="md:w-[50%]">
+</div>
+<script src='../index.js'></script>
+<script>
+    document.querySelector("body").addEventListener("keypress",(event)=>{
+        if(event.key==="Enter")
+        {
+            console.log("hellllo")
+            document.querySelector("button").click();
+        }
+    })
+</script>
+</body>
+</html>
+
+

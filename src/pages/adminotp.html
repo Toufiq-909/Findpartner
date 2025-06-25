@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.4.0/dist/full.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {},
+                screens: {
+                    'sm': '640px',
+                    'md': '768px', // Must be present for `md:` to work
+                    'lg': '1024px',
+                    'xl': '1280px',
+                }
+            },
+            plugins: [],
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Imperial+Script&family=Lavishly+Yours&family=Pinyon+Script&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white h-screen">
+<div class="ml-8 pt-12 md:flex justify-center items-center">
+    <img src="../../images/Enter%20OTP-pana.png" class="w-[80%] ml-2 mr-0 md:w-[40%] md:mr-32">
+    <div class="h-[266px] md:w-[30%] md:h-[350px] flex flex-col justify-around">
+        <p class="text-black font-[cookie] text-4xl">Verification Code</p>
+        <p class="text-black font-[cookie] text-2xl mt-4 mb-4">We have sent the verification<br>code to your email address</p>
+        <div class="flex flex-row justify-around w-[90%]">
+            <input class="input w-[50px] h-[50px] text-center " type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+            <input class="input w-[50px] h-[50px] text-center " type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+            <input class="input w-[50px] h-[50px] text-center " type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+            <input class="input w-[50px] h-[50px] text-center " type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+            <input class="input w-[50px] h-[50px] text-center " type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+            <input class="input w-[50px] h-[50px] text-center " type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+        </div>
+        <button class="btn normal-case text-3xl w-[90%] font-[cookie] mt-8" onclick="dp()">Verify</button>
+        <div class="flex  mt-8">
+            <button class="btn w-[40%] normal-case font-[cookie] text-2xl" onclick="back()">Change Mail</button>
+            <button class="btn w-[40%] ml-10 normal-case font-[cookie] text-2xl" onclick="re()">Send Again</button>
+        </div>
+    </div>
+</div>
+
+<script src="../admin.js"></script>
+<script>
+    let a=document.querySelectorAll("input");
+    a.forEach((element)=>{
+        element.addEventListener("input",()=>{
+            let nextelement=element.nextElementSibling;
+            console.log(nextelement);
+            if(nextelement!=null)
+            {
+                nextelement.focus();
+            }
+        })
+    })
+    async function back()
+    {
+
+        let res=await fetch("http://localhost:3000/admin/delete",{
+            method:"DELETE",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                mail:localStorage.getItem("admin_mail")
+            })
+        })
+        if(res.ok)
+        {
+            window.location.replace("admin.html")
+        }
+        else
+        {
+            console.log("server issue")
+        }
+    }
+    async function re()
+    {
+        let i=localStorage.getItem("admin_mail")
+        let j=localStorage.getItem("admin_password")
+        let res=await fetch("http://localhost:3000/admin/again",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                email:i,
+                password:j,
+            })
+        })
+
+    }
+    document.querySelector("body").addEventListener("keypress",(event)=> {
+        if (event.key === "Enter") {
+            console.log("hellllo")
+            document.querySelector("button").click();
+        }
+    })
+</script>
+</body>
+</html>
